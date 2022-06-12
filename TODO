@@ -1,0 +1,18 @@
+Here are the TODO things:
+
+28 Aug 2021
+
+1. Component Class
+  i.  Functionality - Base class creation is complete.
+2. Logger Class
+  i.    Base class, threading, log levels and API formation.
+  ii.   Derived classes and scope.
+  iii.  Rolling logs.
+3. Media Class
+  i.   Scope of media class.	- Base Class Creation complete.
+  ii.  API for input and output media.
+4. License Class
+  i.   Holistic license management.
+  ii.  Multiple  type of requirements and validation.
+  iii. License renewal and upgradation.
+5. Pipe Class.
