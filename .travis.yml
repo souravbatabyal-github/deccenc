@@ -1,9 +1,9 @@
 language: cpp
 dist: bionic
 compiler:
-- clang
-- gcc
 - g++
+#- clang
+#- gcc
 os:
 - linux
 script:
