@@ -1,7 +1,5 @@
-//
 // main.cpp
 // Logger test module
-//
 
 #include <iostream>
 #include "logger.h"

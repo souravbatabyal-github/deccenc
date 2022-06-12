@@ -1,7 +1,5 @@
-//
 // main.cpp
 // Logger test module
-//
 
 #include <iostream>
 #include "logger.h"
@@ -10,7 +8,7 @@
 #include "media_par.h"
 
 int main() {
-	std::string media_handle("file://asgjkahsdbfhjasdgb");
+	std::string media_handle("file://test_media_handle");
 	deccenc::Media* l_p_media = new deccenc::Media(deccenc::media_io_type::input, media_handle);
 
 	info("Media ID: %lld", l_p_media->get_media_id());
