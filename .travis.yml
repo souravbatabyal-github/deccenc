@@ -1,0 +1,15 @@
+language: cpp
+dist: bionic
+compiler:
+- clang
+- gcc
+- g++
+os:
+- linux
+script:
+- if [ $TRAVIS_OS_NAME == osx ]; then ./build.sh ; fi
+branches:
+  only:
+  - main
+notifications:
+  email: true
