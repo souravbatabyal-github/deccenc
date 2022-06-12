@@ -1,6 +1,6 @@
 # deccenc - A multimedia helper
 
-[![Build Status](https://app.travis-ci.com/sourbatabyal/deccenc.svg?branch=main)](https://app.travis-ci.com/github/souravbatabyal-github/deccenc)
+[![Build Status](https://app.travis-ci.com/souravbatabyal-github/deccenc.svg?branch=main)](https://app.travis-ci.com/souravbatabyal-github/deccenc)
 
 ## Build Guide
 
