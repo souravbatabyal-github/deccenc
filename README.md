@@ -1,10 +1,6 @@
 # deccenc - A multimedia helper
 
-[![Build Status](https://app.travis-ci.com/sourbatabyal/deccenc.svg?branch=main)](https://app.travis-ci.com/sourbatabyal/deccenc)
-
-## Developers
-
-1. Sourav Batabyal (mailme.souravbatabyal@gmail.com)
+[![Build Status](https://app.travis-ci.com/sourbatabyal/deccenc.svg?branch=main)](https://app.travis-ci.com/github/souravbatabyal-github/deccenc)
 
 ## Build Guide
 
