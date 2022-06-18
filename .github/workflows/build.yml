@@ -43,11 +43,17 @@ jobs:
           curl -sSLo $HOME/.sonar/build-wrapper-linux-x86.zip ${{ env.BUILD_WRAPPER_DOWNLOAD_URL }}
           unzip -o $HOME/.sonar/build-wrapper-linux-x86.zip -d $HOME/.sonar/
           echo "$HOME/.sonar/build-wrapper-linux-x86" >> $GITHUB_PATH
-      - name: Run build-wrapper
-        run: |
-          autoreconf --install
-          ./configure
-          build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} make clean all
+#      - name: Run build-wrapper
+#        run: |
+#            make distclean
+#            aclocal
+#            autoconf
+#            automake -i --add-missing
+#            ./configure
+#            make
+#            #autoreconf --install
+#            #./configure
+#            #build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} make clean all
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
