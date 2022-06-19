@@ -1,6 +1,3 @@
-// traceme.h
-// Component to trace a line/function
-
 /**
 MIT License
 
@@ -24,13 +21,20 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-
-#include "stdio.h"
-
-#define debug(fmt, ...)		\
-	printf("\n F[%s] f[%s] l[%d]" fmt, __FILE__, __func__, __LINE__, ##__VA_ARGS__);	\
-	fflush(stdout);
-
-#define info(fmt, ...)		\
-	printf(" INFO: f[%-20s] l[%-3d] " fmt "\n", __func__, __LINE__, ##__VA_ARGS__);	\
-	fflush(stdout);
+/**
+  rlogger.c
+  Rolling log implementation, using logger_api.h API.
+*/
+#include "rlogger.h"
+void logger_init(char *name, int baselevel, LoggerSpace **out_space)
+{
+}
+void logger_setlevel(LoggerSpace *space, int level)
+{
+}
+void logger_log(LoggerSpace *space, int level, char* log)
+{
+}
+void logger_close(LoggerSpace **space)
+{
+}

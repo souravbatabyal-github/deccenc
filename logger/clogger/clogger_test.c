@@ -21,14 +21,48 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-// t_utility.h
-// Time related utility functions.
+/**
+  clogger_test.c
+  Clogger test code.
+*/
 #include <stddef.h>
-/**
- * Returns current time in milliseconds.
- */
-long long get_current_time_millis();
-/**
- * Get human readable timestamp, in ddd yyyy-mm-dd hh:mm:ss zzz format.
- */
-void get_current_time_readable(char *buf, size_t sizeof_buf);
+#include "clogger.h"
+
+/* Testcase Functions */
+/* Test Case - 1: logger name is NULL - ok or not.*/
+void tc_1()
+{
+    LoggerSpace *space = NULL;
+    logger_init(NULL, LogLevel_Err, &space);
+    logger_log(space, LogLevel_Dbg, "tc1: test log - debug");
+    logger_log(space, LogLevel_Crt, "tc1: test log - critical");
+    logger_close(&space);
+}
+/* Test Case - 2: logger dataspace is NULL - ok or not.*/
+void tc_2()
+{
+    logger_init(NULL, LogLevel_Err, NULL);
+    logger_log(NULL, LogLevel_Dbg, "tc2: test log - debug");
+    logger_log(NULL, LogLevel_Crt, "tc2: test log - critical");
+    logger_close(NULL);
+}
+/* Test Case - 3: logger name, dataspace is not NULL - ok or not.*/
+void tc_3()
+{
+    LoggerSpace *space = NULL;
+    logger_init("tc-3", LogLevel_Err, &space);
+    logger_log(space, LogLevel_Dbg, "tc3: test log - debug");
+    logger_log(space, LogLevel_Crt, "tc3: test log - critical");
+    logger_close(&space);
+}
+
+
+/* Main */
+int main()
+{
+    tc_1();
+    tc_2();
+    tc_3();
+
+    return 0;
+}

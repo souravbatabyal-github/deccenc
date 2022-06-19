@@ -1,2 +1,2 @@
 make distclean
-rm -rf aclocal.m4 autom4te.cache build build.sh CMakeLists.txt compile config.log config.status configure configure.ac.old depcomp install-sh Makefile.in Makefile missing ar-lib
+rm -rf aclocal.m4 autom4te.cache build build.sh CMakeLists.txt compile config.log config.status configure configure.ac.old depcomp install-sh Makefile.in Makefile missing ar-lib bin lib include AUTHORS ChangeLog NEWS README

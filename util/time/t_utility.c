@@ -27,6 +27,7 @@ SOFTWARE.
 #include "t_utility.h"
 #include <sys/time.h>
 #include <stddef.h>
+#include <time.h>
 
 long long get_current_time_millis()
 {
@@ -34,4 +35,15 @@ long long get_current_time_millis()
     gettimeofday(&tm, NULL);    
     long long milliseconds = tm.tv_sec*1000LL + tm.tv_usec/1000; // calculate milliseconds
     return milliseconds;
+}
+void get_current_time_readable(char *buf, size_t sizeof_buf)
+{
+    if (NULL != buf && sizeof_buf > 0)
+    {
+        struct tm ts;
+        time_t now;
+        time(&now);
+        ts = *localtime(&now);
+        strftime(buf, sizeof_buf, "%Y-%m-%d %H:%M:%S %Z", &ts);
+    }
 }

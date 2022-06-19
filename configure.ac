@@ -16,12 +16,17 @@ AC_PROG_RANLIB
 
 # Checks for library functions.
 
+AM_CONDITIONAL([TARGET_LOGTYPE_RLOG], [test x$logtype = xrlog])
+AM_CONDITIONAL([TARGET_LOGTYPE_CLOG], [test x$logtype = xclog])
+
 AC_CONFIG_FILES([
         Makefile 
-        traceme/Makefile
-        common/Makefile
         util/Makefile
         util/time/Makefile
+        logger/Makefile
+        logger/rlogger/Makefile
+        logger/clogger/Makefile
+        common/Makefile
         component/Makefile
         media/Makefile
 ])
