@@ -21,14 +21,14 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-// t_utility.h
-// Time related utility functions.
+/**
+  rlogger.h
+  Rolling log implementation, using logger_api.h API.
+*/
 #include <stddef.h>
-/**
- * Returns current time in milliseconds.
- */
-long long get_current_time_millis();
-/**
- * Get human readable timestamp, in ddd yyyy-mm-dd hh:mm:ss zzz format.
- */
-void get_current_time_readable(char *buf, size_t sizeof_buf);
+#include "logger_api.h"
+typedef struct _rlogger_data_
+{
+    size_t time_limit_millis_;   // after every n millis logs will be rolled to new file.
+    size_t size_limit_bytes_;    // after how much bytes, logs will be rolled to new file.
+};

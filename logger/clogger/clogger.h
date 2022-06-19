@@ -21,14 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-// t_utility.h
-// Time related utility functions.
-#include <stddef.h>
 /**
- * Returns current time in milliseconds.
- */
-long long get_current_time_millis();
-/**
- * Get human readable timestamp, in ddd yyyy-mm-dd hh:mm:ss zzz format.
- */
-void get_current_time_readable(char *buf, size_t sizeof_buf);
+  clogger.h
+  Console log implementation, using logger_api.h API.
+*/
+#include "logger_api.h"

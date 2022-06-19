@@ -21,14 +21,31 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-// t_utility.h
-// Time related utility functions.
-#include <stddef.h>
 /**
- * Returns current time in milliseconds.
- */
-long long get_current_time_millis();
-/**
- * Get human readable timestamp, in ddd yyyy-mm-dd hh:mm:ss zzz format.
- */
-void get_current_time_readable(char *buf, size_t sizeof_buf);
+logger_api.h
+Logger usage API.
+*/
+#define debug(fmt, ...)		\
+	printf("\n F[%s] f[%s] l[%d]" fmt, __FILE__, __func__, __LINE__, ##__VA_ARGS__);	\
+	fflush(stdout);
+#define info(fmt, ...)		\
+	printf(" INFO: f[%-20s] l[%-3d] " fmt "\n", __func__, __LINE__, ##__VA_ARGS__);	\
+	fflush(stdout);
+typedef struct _loggerspace_
+{
+    char* name_;
+    int level_;
+} LoggerSpace;
+enum _loglevel_
+{
+    LogLevel_Dbg = 1,   // log level debug
+    LogLevel_Inf,       // log level info
+    LogLevel_Wrn,       // log level warning
+    LogLevel_Err,       // log level error
+    LogLevel_Crt,       // log level critical
+    LogLevel_Ftl        // log level fatal
+};
+void logger_init(char *name, int baselevel, LoggerSpace **out_space);
+void logger_setlevel(LoggerSpace *space, int level);
+void logger_log(LoggerSpace *space, int level, char* log);
+void logger_close(LoggerSpace **space);
