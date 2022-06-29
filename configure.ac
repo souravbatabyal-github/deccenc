@@ -25,8 +25,7 @@ AM_CONDITIONAL([TARGET_BUILDTYPE_RELEASE], [test x$buildtype = xrelease])
 AM_CONDITIONAL([TARGET_BUILDTYPE_DEBUG], [test x$buildtype = xdebug])
 
 AC_CONFIG_FILES([
-        Makefile 
-        myprintf/Makefile
+        Makefile
         util/Makefile
         util/time/Makefile
         util/string/Makefile
