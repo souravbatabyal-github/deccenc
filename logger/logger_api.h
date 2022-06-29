@@ -25,16 +25,18 @@ SOFTWARE.
 logger_api.h
 Logger usage API.
 */
-#define debug(fmt, ...)		\
-	printf("\n F[%s] f[%s] l[%d]" fmt, __FILE__, __func__, __LINE__, ##__VA_ARGS__);	\
-	fflush(stdout);
-#define info(fmt, ...)		\
+#include <stddef.h>
+#include <stdio.h>
+#define debug(fmt, ...) \
+    printf("\n F[%s] f[%s] l[%d]" fmt, __FILE__, __func__, __LINE__, ##__VA_ARGS__); \
+    fflush(stdout);
+#define info(fmt, ...) \
 	printf(" INFO: f[%-20s] l[%-3d] " fmt "\n", __func__, __LINE__, ##__VA_ARGS__);	\
 	fflush(stdout);
 typedef struct _loggerspace_
 {
-    char* name_;
-    int level_;
+    char        *name_;
+    int         level_;
 } LoggerSpace;
 enum _loglevel_
 {
@@ -45,7 +47,7 @@ enum _loglevel_
     LogLevel_Crt,       // log level critical
     LogLevel_Ftl        // log level fatal
 };
-void logger_init(char *name, int baselevel, LoggerSpace **out_space);
-void logger_setlevel(LoggerSpace *space, int level);
-void logger_log(LoggerSpace *space, int level, char* log);
-void logger_close(LoggerSpace **space);
+void logger_init(char *name, int baselevel, void **space);
+void logger_setlevel(void *space, int level);
+void logger_log(void *space, int level, char* log);
+void logger_close(void **space);

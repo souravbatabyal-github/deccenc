@@ -31,5 +31,17 @@
 *.out
 *.app
 
-# Packages
-build
+# GNU autotools related
+aclocal.m4
+autom4te.cache
+compile
+config.log
+config.status
+configure
+depcomp
+install-sh
+Makefile.in
+Makefile
+missing
+ar-lib
+bin

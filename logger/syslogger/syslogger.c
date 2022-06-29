@@ -22,13 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 /**
-  clogger.c
-  Console log implementation, using logger_api.h API.
+  syslogger.c
+  Syslog implementation, using logger_api.h API.
 */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "clogger.h"
+#include <syslog.h>
+#include "syslogger.h"
 #include "t_utility.h"
 void logger_init(char *name, int baselevel, void **space)
 {
@@ -43,13 +44,18 @@ void logger_init(char *name, int baselevel, void **space)
     {
         (*lspace)->name_ = strdup(name);
         (*lspace)->level_ = baselevel;
+        //setlogmask (LOG_UPTO ((*lspace)->level_));
+        openlog ((*lspace)->name_, LOG_CONS | LOG_PID | LOG_NDELAY, LOG_LOCAL1);
     }
 }
 void logger_setlevel(void *space, int level)
 {
     LoggerSpace *lspace = (LoggerSpace*)space;
     if (lspace)
+    {
         lspace->level_ = level;
+        setlogmask (LOG_UPTO (lspace->level_));
+    }
 }
 void logger_log(void *space, int level, char* log)
 {
@@ -60,9 +66,12 @@ void logger_log(void *space, int level, char* log)
         return;
     if (level >= lspace->level_)
     {
+        /*
         char htime[80] = {0};
         get_current_time_readable(htime, (size_t)80);
         printf("\n[%s][%s][%s]", htime, lspace->name_,log);
+        */
+        syslog (level, "%s", log);
     }
 }
 void logger_close(void **space)
@@ -70,6 +79,7 @@ void logger_close(void **space)
     LoggerSpace **lspace = (LoggerSpace**)space;
     if (lspace && *lspace)
     {
+        closelog();
         free((*lspace)->name_);
         (*lspace)->name_ = NULL;
         (*lspace)->level_ = LogLevel_Dbg;
