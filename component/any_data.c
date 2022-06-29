@@ -28,20 +28,19 @@ SOFTWARE.
 #include <string.h>
 #include <stdlib.h>
 #include "any_data.h"
-#include "memutil.h"
 
 /**
   * Set data name; this is the unique identifier of the data.
   */
 RType set_name(AnyData* data, const char* const name, size_t name_len)
 {
-    if (IS_NULL(data) || IS_NULL(name))
+    if (!data || !name)
         return RT_NULL_Pointer;
-    if (data->name_ != NULL)
+    if (data->name_)
     {
         free(data->name_);
         data->name_ = NULL;
     }
     void* dst = memcpy((void *)data->name_, (void *)name, name_len);
-    IS_NULL((char*)dst)? RT_Error : RT_Success;
+    (char*)dst?RT_Success:RT_Error;
 }

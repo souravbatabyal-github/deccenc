@@ -22,18 +22,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 /**
-  clogger_test.c
-  Clogger test code.
+  flogger_test.c
+  flogger test code.
 */
 #include <stddef.h>
-#include "clogger.h"
+#include <limits.h>
+#include "flogger.h"
 
 /* Testcase Functions */
 /* Test Case - 1: logger name is NULL - ok or not.*/
 void tc_1()
 {
-    LoggerSpace *space = NULL;
+    FLoggerSpace *space = NULL;
     logger_init(NULL, LogLevel_Err, (void**)&space);
+    flogger_set_fname((void*)space, "out.log");
     logger_log((void*)space, LogLevel_Dbg, "tc1: test log - debug");
     logger_log((void*)space, LogLevel_Crt, "tc1: test log - critical");
     logger_close((void**)&space);
@@ -42,6 +44,7 @@ void tc_1()
 void tc_2()
 {
     logger_init(NULL, LogLevel_Err, NULL);
+    flogger_set_fname(NULL, "out.log");
     logger_log(NULL, LogLevel_Dbg, "tc2: test log - debug");
     logger_log(NULL, LogLevel_Crt, "tc2: test log - critical");
     logger_close(NULL);
@@ -49,10 +52,32 @@ void tc_2()
 /* Test Case - 3: logger name, dataspace is not NULL - ok or not.*/
 void tc_3()
 {
-    LoggerSpace *space = NULL;
+    FLoggerSpace *space = NULL;
     logger_init("tc-3", LogLevel_Err, (void**)&space);
+    flogger_set_fname((void*)space, "out.log");
     logger_log((void*)space, LogLevel_Dbg, "tc3: test log - debug");
     logger_log((void*)space, LogLevel_Crt, "tc3: test log - critical");
+    logger_close((void**)&space);
+}
+/* Test Case - 4: bulk log.*/
+void tc_4()
+{
+    FLoggerSpace *space = NULL;
+    logger_init("tc-4", LogLevel_Dbg, (void**)&space);
+    flogger_set_fname((void*)space, "out.log");
+    long i = 10000;
+    while(i-- > 0)
+    {
+        logger_log((void*)space, LogLevel_Dbg, "tc4: test log - debug");
+        logger_log((void*)space, LogLevel_Crt, "tc4: test log - critical");
+    }
+    flogger_set_fname((void*)space, "out1.log");
+    i = 10000;
+    while(i-- > 0)
+    {
+        logger_log((void*)space, LogLevel_Dbg, "tc4: test log - debug");
+        logger_log((void*)space, LogLevel_Crt, "tc4: test log - critical");
+    }
     logger_close((void**)&space);
 }
 
@@ -62,6 +87,7 @@ int main()
     tc_1();
     tc_2();
     tc_3();
+    tc_4();
 
     return 0;
 }

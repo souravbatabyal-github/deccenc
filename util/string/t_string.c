@@ -1,3 +1,5 @@
+// t_string.c
+
 /**
 MIT License
 
@@ -21,27 +23,41 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-/**
-  rlogger.h
-  Rolling log implementation, using logger_api.h API.
-*/
-#include <pthread.h>
-#include "logger_api.h"
-typedef struct _rloggerspace_
+
+#include "t_string.h"
+
+char* replace_word(const char* s, const char* old_w, const char* new_w)
 {
-    LoggerSpace *lspace_;                   // logger space
-    char        *file_name_;                // log file name
-    FILE        *h_file_;                   // log file handle
-
-    size_t      bytes_written_;             // how much bytes written to the file
-    long long   time_written_ms_start_;     // data since time written in file
-    long long   time_written_ms_end_;       // data of how much time written in file
-
-    size_t      size_limit_bytes_;          // after how much bytes, logs will be rolled to new file
-    long long   time_limit_ms_;             // after every n millis logs will be rolled to new file
-
-    pthread_t   *thread_;                    // rotating log writer thread
-} RLoggerSpace;
-void rlogger_set_fname(void *space, char *fname);
-void rlogger_set_byte_limit(void *space, size_t maxbytes);
-void rlogger_set_time_limit_ms(void *space, long long maxmillis);
+    char* result;
+    int i, cnt = 0;
+    int new_wlen = strlen(new_w);
+    int old_wlen = strlen(old_w);
+ 
+    // Counting the number of times old word occur in the string
+    for (i = 0; s[i] != '\0'; i++) {
+        if (strstr(&s[i], old_w) == &s[i]) {
+            cnt++;
+ 
+            // Jumping to index after the old word.
+            i += old_wlen - 1;
+        }
+    }
+ 
+    // Making new string of enough length
+    result = (char*)malloc(i + cnt * (new_wlen - old_wlen) + 1);
+ 
+    i = 0;
+    while (*s) {
+        // compare the substring with the result
+        if (strstr(s, old_w) == s) {
+            strcpy(&result[i], new_w);
+            i += new_wlen;
+            s += old_wlen;
+        }
+        else
+            result[i++] = *s++;
+    }
+ 
+    result[i] = '\0';
+    return result;
+}

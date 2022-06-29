@@ -22,18 +22,18 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 /**
-  clogger_test.c
-  Clogger test code.
+  syslogger_test.c
+  syslogger test code.
 */
 #include <stddef.h>
-#include "clogger.h"
+#include "syslogger.h"
 
 /* Testcase Functions */
 /* Test Case - 1: logger name is NULL - ok or not.*/
 void tc_1()
 {
     LoggerSpace *space = NULL;
-    logger_init(NULL, LogLevel_Err, (void**)&space);
+    logger_init(NULL, LogLevel_Dbg, (void**)&space);
     logger_log((void*)space, LogLevel_Dbg, "tc1: test log - debug");
     logger_log((void*)space, LogLevel_Crt, "tc1: test log - critical");
     logger_close((void**)&space);
@@ -41,7 +41,7 @@ void tc_1()
 /* Test Case - 2: logger dataspace is NULL - ok or not.*/
 void tc_2()
 {
-    logger_init(NULL, LogLevel_Err, NULL);
+    logger_init(NULL, LogLevel_Dbg, NULL);
     logger_log(NULL, LogLevel_Dbg, "tc2: test log - debug");
     logger_log(NULL, LogLevel_Crt, "tc2: test log - critical");
     logger_close(NULL);
@@ -50,9 +50,14 @@ void tc_2()
 void tc_3()
 {
     LoggerSpace *space = NULL;
-    logger_init("tc-3", LogLevel_Err, (void**)&space);
-    logger_log((void*)space, LogLevel_Dbg, "tc3: test log - debug");
-    logger_log((void*)space, LogLevel_Crt, "tc3: test log - critical");
+    logger_init("tc-3", LogLevel_Dbg, (void**)&space);
+    int n = 0;
+    while (n <= 100)
+    {
+        logger_log((void*)space, LogLevel_Dbg, "tc3: test log - debug");
+        logger_log((void*)space, LogLevel_Crt, "tc3: test log - critical");
+        n++;
+    }
     logger_close((void**)&space);
 }
 

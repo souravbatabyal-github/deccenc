@@ -38,7 +38,7 @@ long long get_current_time_millis()
 }
 void get_current_time_readable(char *buf, size_t sizeof_buf)
 {
-    if (NULL != buf && sizeof_buf > 0)
+    if (buf && sizeof_buf > 0)
     {
         struct tm ts;
         time_t now;
